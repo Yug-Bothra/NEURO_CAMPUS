@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 
 const StudentsTable = () => {
@@ -134,232 +134,248 @@ const StudentsTable = () => {
   };
 
   return (
-    <div>
-      {/* --- STUDENTS MANAGEMENT --- */}
-      <h2 className="text-2xl font-bold text-blue-600 mb-4">Students</h2>
+    <div className="p-2 md:p-6 bg-gray-50 min-h-screen flex justify-center">
+      <div className="w-full max-w-screen-lg">
+        {/* --- STUDENTS MANAGEMENT --- */}
+        <h2 className="text-xl md:text-2xl font-bold text-blue-600 mb-4">Students</h2>
 
-      <form
-        onSubmit={saveStudent}
-        className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 bg-white p-6 rounded shadow"
-      >
-        <input
-          type="text"
-          placeholder="Enrollment Number"
-          value={form.enrollment_number}
-          onChange={(e) =>
-            setForm({ ...form, enrollment_number: e.target.value })
-          }
-          className="border border-blue-300 rounded px-4 py-2"
-          required
-          disabled={!!editingId}
-        />
-        <input
-          type="text"
-          placeholder="Name"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-          className="border border-blue-300 rounded px-4 py-2"
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          className="border border-blue-300 rounded px-4 py-2"
-          required
-        />
-        <input
-          type="text"
-          placeholder="Mobile Number"
-          value={form.mobile_number}
-          onChange={(e) =>
-            setForm({ ...form, mobile_number: e.target.value })
-          }
-          className="border border-blue-300 rounded px-4 py-2"
-        />
-        <input
-          type="number"
-          placeholder="Semester"
-          value={form.semester}
-          onChange={(e) => setForm({ ...form, semester: e.target.value })}
-          className="border border-blue-300 rounded px-4 py-2"
-          required
-        />
-        <input
-          type="number"
-          placeholder="Fees"
-          value={form.fees}
-          onChange={(e) => setForm({ ...form, fees: e.target.value })}
-          className="border border-blue-300 rounded px-4 py-2"
-        />
-        <select
-          value={form.branch}
-          onChange={(e) => setForm({ ...form, branch: e.target.value })}
-          className="border border-blue-300 rounded px-4 py-2"
+        <form
+          onSubmit={saveStudent}
+          className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mb-6 md:mb-8 bg-white p-4 md:p-8 rounded-lg shadow-md"
         >
-          <option value="CSE">CSE</option>
-          <option value="ECE">ECE</option>
-          <option value="EEE">EEE</option>
-          <option value="MECH">MECH</option>
-          <option value="CIVIL">CIVIL</option>
-        </select>
-        <input
-          type="text"
-          placeholder="Section"
-          value={form.section}
-          onChange={(e) => setForm({ ...form, section: e.target.value })}
-          className="border border-blue-300 rounded px-4 py-2"
-        />
-        <div className="flex space-x-2">
-          <button
-            type="submit"
-            className={`${
-              editingId ? "bg-yellow-500" : "bg-blue-600"
-            } text-white px-4 py-2 rounded`}
+          <input
+            type="text"
+            placeholder="Enrollment Number"
+            value={form.enrollment_number}
+            onChange={(e) =>
+              setForm({ ...form, enrollment_number: e.target.value })
+            }
+            className="border border-blue-300 rounded px-2 md:px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 break-words"
+            required
+            disabled={!!editingId}
+          />
+          <input
+            type="text"
+            placeholder="Name"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            className="border border-blue-300 rounded px-2 md:px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 break-words"
+            required
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            className="border border-blue-300 rounded px-2 md:px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 break-words"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Mobile Number"
+            value={form.mobile_number}
+            onChange={(e) =>
+              setForm({ ...form, mobile_number: e.target.value })
+            }
+            className="border border-blue-300 rounded px-2 md:px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 break-words"
+          />
+          <input
+            type="number"
+            placeholder="Semester"
+            value={form.semester}
+            onChange={(e) => setForm({ ...form, semester: e.target.value })}
+            className="border border-blue-300 rounded px-2 md:px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 break-words"
+            required
+          />
+          <input
+            type="number"
+            placeholder="Fees"
+            value={form.fees}
+            onChange={(e) => setForm({ ...form, fees: e.target.value })}
+            className="border border-blue-300 rounded px-2 md:px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 break-words"
+          />
+          <select
+            value={form.branch}
+            onChange={(e) => setForm({ ...form, branch: e.target.value })}
+            className="border border-blue-300 rounded px-2 md:px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
-            {editingId ? "Update Student" : "Add Student"}
-          </button>
-          {editingId && (
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="MECH">MECH</option>
+            <option value="CIVIL">CIVIL</option>
+          </select>
+          <input
+            type="text"
+            placeholder="Section"
+            value={form.section}
+            onChange={(e) => setForm({ ...form, section: e.target.value })}
+            className="border border-blue-300 rounded px-2 md:px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 break-words"
+          />
+          <div className="flex space-x-2 md:space-x-3 mt-2">
             <button
-              type="button"
-              onClick={() => {
-                setEditingId(null);
-                resetForm();
-              }}
-              className="bg-gray-500 text-white px-4 py-2 rounded"
+              type="submit"
+              className={`${
+                editingId ? "bg-yellow-500 hover:bg-yellow-600" : "bg-blue-600 hover:bg-blue-700"
+              } text-white px-3 md:px-5 py-2 rounded-lg shadow transition`}
             >
-              Cancel
+              {editingId ? "Update Student" : "Add Student"}
             </button>
-          )}
-        </div>
-      </form>
+            {editingId && (
+              <button
+                type="button"
+                onClick={() => {
+                  setEditingId(null);
+                  resetForm();
+                }}
+                className="bg-gray-500 hover:bg-gray-600 text-white px-3 md:px-5 py-2 rounded-lg shadow transition"
+              >
+                Cancel
+              </button>
+            )}
+          </div>
+        </form>
 
-      {/* --- STUDENTS TABLE --- */}
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="bg-white rounded shadow overflow-x-auto mb-10">
-          <table className="min-w-full text-sm">
-            <thead className="bg-blue-600 text-white">
+        {/* --- STUDENTS TABLE --- */}
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="bg-white rounded-lg shadow-md overflow-x-auto mb-8">
+            <table className="min-w-full text-xs md:text-sm">
+              <thead className="bg-blue-600 text-white">
+                <tr>
+                  <th className="p-2 md:p-4 text-left">Enrollment</th>
+                  <th className="p-2 md:p-4 text-left">Name</th>
+                  <th className="p-2 md:p-4 text-left">Email</th>
+                  <th className="p-2 md:p-4 text-left">Mobile</th>
+                  <th className="p-2 md:p-4 text-left">Semester</th>
+                  <th className="p-2 md:p-4 text-left">Fees</th>
+                  <th className="p-2 md:p-4 text-left">Branch</th>
+                  <th className="p-2 md:p-4 text-left">Section</th>
+                  <th className="p-2 md:p-4 text-left">Created At</th>
+                  <th className="p-2 md:p-4 text-left">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white text-gray-800">
+                {students.map((s, idx) => (
+                  <tr
+                    key={s.enrollment_number}
+                    className={`border-b ${idx % 2 === 0 ? "bg-gray-50" : "bg-white"}`}
+                  >
+                    <td className="p-2 md:p-4 break-words">{s.enrollment_number}</td>
+                    <td className="p-2 md:p-4 break-words">{s.name}</td>
+                    <td className="p-2 md:p-4 break-words">{s.email}</td>
+                    <td className="p-2 md:p-4 break-words">{s.mobile_number}</td>
+                    <td className="p-2 md:p-4">{s.semester}</td>
+                    <td className="p-2 md:p-4">{s.fees}</td>
+                    <td className="p-2 md:p-4">{s.branch}</td>
+                    <td className="p-2 md:p-4">{s.section}</td>
+                    <td className="p-2 md:p-4">
+                      {new Date(s.created_at).toLocaleString()}
+                    </td>
+                    <td className="p-2 md:p-4">
+                      <div className="flex flex-col md:flex-row space-y-1 md:space-y-0 md:space-x-2">
+                        <button
+                          onClick={() => startEdit(s)}
+                          className="bg-yellow-500 hover:bg-yellow-600 text-white px-2 md:px-4 py-1 rounded-lg shadow transition"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => deleteStudent(s.enrollment_number)}
+                          className="bg-red-500 hover:bg-red-600 text-white px-2 md:px-4 py-1 rounded-lg shadow transition"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* --- STUDENT LOGIN CREDENTIALS --- */}
+        <h2 className="text-xl md:text-2xl font-bold text-green-600 mb-4">
+          Student Login Credentials
+        </h2>
+
+        {/* Search bar */}
+        <div className="mb-4 md:mb-6">
+          <input
+            type="text"
+            placeholder="Search by Enrollment Number"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="border border-green-400 rounded px-2 md:px-4 py-2 w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-green-400"
+          />
+        </div>
+
+        <div className="bg-white rounded-lg shadow-md overflow-x-auto">
+          <table className="min-w-full text-xs md:text-sm">
+            <thead className="bg-green-600 text-white">
               <tr>
-                <th className="p-3 text-left">Enrollment</th>
-                <th className="p-3 text-left">Name</th>
-                <th className="p-3 text-left">Email</th>
-                <th className="p-3 text-left">Mobile</th>
-                <th className="p-3 text-left">Semester</th>
-                <th className="p-3 text-left">Fees</th>
-                <th className="p-3 text-left">Branch</th>
-                <th className="p-3 text-left">Section</th>
-                <th className="p-3 text-left">Created At</th>
-                <th className="p-3 text-left">Actions</th>
+                <th className="p-2 md:p-4 text-left">Enrollment</th>
+                <th className="p-2 md:p-4 text-left">Name</th>
+                <th className="p-2 md:p-4 text-left">Password</th>
+                <th className="p-2 md:p-4 text-left">Must Reset?</th>
+                <th className="p-2 md:p-4 text-left">Created At</th>
+                <th className="p-2 md:p-4 text-left">Actions</th>
               </tr>
             </thead>
             <tbody className="bg-white text-gray-800">
-              {students.map((s) => (
-                <tr key={s.enrollment_number} className="border-b">
-                  <td className="p-3">{s.enrollment_number}</td>
-                  <td className="p-3">{s.name}</td>
-                  <td className="p-3">{s.email}</td>
-                  <td className="p-3">{s.mobile_number}</td>
-                  <td className="p-3">{s.semester}</td>
-                  <td className="p-3">{s.fees}</td>
-                  <td className="p-3">{s.branch}</td>
-                  <td className="p-3">{s.section}</td>
-                  <td className="p-3">
-                    {new Date(s.created_at).toLocaleString()}
-                  </td>
-                  <td className="p-3 space-x-2">
-                    <button
-                      onClick={() => startEdit(s)}
-                      className="bg-yellow-500 text-white px-3 py-1 rounded"
+              {students
+                .filter((s) =>
+                  !search
+                    ? true
+                    : s.enrollment_number
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+                )
+                .map((s, idx) => {
+                  const login = logins.find(
+                    (l) => l.enrollment_number === s.enrollment_number
+                  );
+                  return (
+                    <tr
+                      key={s.enrollment_number}
+                      className={`border-b ${idx % 2 === 0 ? "bg-gray-50" : "bg-white"}`}
                     >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => deleteStudent(s.enrollment_number)}
-                      className="bg-red-500 text-white px-3 py-1 rounded"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                      <td className="p-2 md:p-4 break-words">{s.enrollment_number}</td>
+                      <td className="p-2 md:p-4 break-words">{s.name}</td>
+                      <td className="p-2 md:p-4 break-words">{login?.password || "svvv@123"}</td>
+                      <td className="p-2 md:p-4">
+                        {login ? (login.must_reset ? "Yes" : "No") : "-"}
+                      </td>
+                      <td className="p-2 md:p-4">
+                        {login
+                          ? new Date(login.created_at).toLocaleString()
+                          : "-"}
+                      </td>
+                      <td className="p-2 md:p-4">
+                        <div className="flex flex-col md:flex-row space-y-1 md:space-y-0 md:space-x-2">
+                          <button
+                            onClick={() => resetPassword(s.enrollment_number)}
+                            disabled={resettingId === s.enrollment_number}
+                            className={`bg-blue-600 hover:bg-blue-700 text-white px-2 md:px-4 py-1 rounded-lg shadow transition ${
+                              resettingId === s.enrollment_number
+                                ? "opacity-60 cursor-not-allowed"
+                                : ""
+                            }`}
+                          >
+                            {resettingId === s.enrollment_number
+                              ? "Resetting..."
+                              : "Reset Password"}
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>
-      )}
-
-      {/* --- STUDENT LOGIN CREDENTIALS --- */}
-      <h2 className="text-2xl font-bold text-green-600 mb-4">
-        Student Login Credentials
-      </h2>
-
-      {/* Search bar */}
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Search by Enrollment Number"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="border border-green-400 rounded px-4 py-2 w-full md:w-1/3"
-        />
-      </div>
-
-      <div className="bg-white rounded shadow overflow-x-auto">
-        <table className="min-w-full text-sm">
-          <thead className="bg-green-600 text-white">
-            <tr>
-              <th className="p-3 text-left">Enrollment</th>
-              <th className="p-3 text-left">Name</th>
-              <th className="p-3 text-left">Password</th>
-              <th className="p-3 text-left">Must Reset?</th>
-              <th className="p-3 text-left">Created At</th>
-              <th className="p-3 text-left">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white text-gray-800">
-            {students
-              .filter((s) =>
-                !search
-                  ? true
-                  : s.enrollment_number
-                      .toLowerCase()
-                      .includes(search.toLowerCase())
-              )
-              .map((s) => {
-                const login = logins.find(
-                  (l) => l.enrollment_number === s.enrollment_number
-                );
-                return (
-                  <tr key={s.enrollment_number} className="border-b">
-                    <td className="p-3">{s.enrollment_number}</td>
-                    <td className="p-3">{s.name}</td>
-                    <td className="p-3">{login?.password || "svvv@123"}</td>
-                    <td className="p-3">
-                      {login ? (login.must_reset ? "Yes" : "No") : "-"}
-                    </td>
-                    <td className="p-3">
-                      {login
-                        ? new Date(login.created_at).toLocaleString()
-                        : "-"}
-                    </td>
-                    <td className="p-3 space-x-2">
-                      <button
-                        onClick={() => resetPassword(s.enrollment_number)}
-                        disabled={resettingId === s.enrollment_number}
-                        className="bg-blue-600 text-white px-3 py-1 rounded"
-                      >
-                        {resettingId === s.enrollment_number
-                          ? "Resetting..."
-                          : "Reset Password"}
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
       </div>
     </div>
   );

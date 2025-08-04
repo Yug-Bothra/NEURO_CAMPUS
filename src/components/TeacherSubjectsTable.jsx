@@ -16,13 +16,9 @@ const TeacherSubjectsTable = () => {
     semester: "",
   });
 
-  // Fetch joined data for display
   const fetchTeacherSubjects = async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from("teacher_subjects_read") // ✅ read view with names
-      .select("*");
-
+    const { data, error } = await supabase.from("teacher_subjects_read").select("*");
     if (error) {
       console.error("Error fetching teacher_subjects:", error);
     } else {
@@ -31,7 +27,6 @@ const TeacherSubjectsTable = () => {
     setLoading(false);
   };
 
-  // Fetch teachers and subjects for dropdowns
   const fetchTeachersAndSubjects = async () => {
     const { data: teacherData } = await supabase
       .from("teachers")
@@ -49,21 +44,14 @@ const TeacherSubjectsTable = () => {
     fetchTeachersAndSubjects();
   }, []);
 
-  // Insert / Update into writable view
   const saveTeacherSubject = async (e) => {
     e.preventDefault();
 
     if (editingId) {
       const { error } = await supabase
-        .from("teacher_subjects") // ✅ writable view
-        .update({
-          teacher_id: form.teacher_id,
-          subject_id: form.subject_id,
-          section: form.section,
-          semester: form.semester,
-        })
+        .from("teacher_subjects")
+        .update(form)
         .eq("id", editingId);
-
       if (error) {
         alert("Update failed: " + error.message);
       } else {
@@ -72,15 +60,7 @@ const TeacherSubjectsTable = () => {
         fetchTeacherSubjects();
       }
     } else {
-      const { error } = await supabase.from("teacher_subjects").insert([
-        {
-          teacher_id: form.teacher_id,
-          subject_id: form.subject_id,
-          section: form.section,
-          semester: form.semester,
-        },
-      ]);
-
+      const { error } = await supabase.from("teacher_subjects").insert([form]);
       if (error) {
         alert("Insert failed: " + error.message);
       } else {
@@ -90,13 +70,8 @@ const TeacherSubjectsTable = () => {
     }
   };
 
-  // Delete
   const deleteTeacherSubject = async (id) => {
-    const { error } = await supabase
-      .from("teacher_subjects")
-      .delete()
-      .eq("id", id);
-
+    const { error } = await supabase.from("teacher_subjects").delete().eq("id", id);
     if (error) {
       alert("Delete failed: " + error.message);
     } else {
@@ -104,7 +79,6 @@ const TeacherSubjectsTable = () => {
     }
   };
 
-  // Start editing
   const startEdit = (record) => {
     setEditingId(record.id);
     setForm({
@@ -115,7 +89,6 @@ const TeacherSubjectsTable = () => {
     });
   };
 
-  // Reset form
   const resetForm = () => {
     setForm({
       teacher_id: "",
@@ -126,10 +99,10 @@ const TeacherSubjectsTable = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Teacher-Subject Assignments</h2>
+    <div className="p-6 bg-white shadow-lg rounded-xl">
+      <h2 className="text-2xl font-semibold text-blue-700 mb-4">Teacher-Subject Assignments</h2>
 
-      {/* Add/Edit Form */}
+      {/* Form */}
       <form
         onSubmit={saveTeacherSubject}
         className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6"
@@ -137,7 +110,7 @@ const TeacherSubjectsTable = () => {
         <select
           value={form.teacher_id}
           onChange={(e) => setForm({ ...form, teacher_id: e.target.value })}
-          className="border p-2 rounded"
+          className="border border-blue-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         >
           <option value="">Select Teacher</option>
@@ -151,7 +124,7 @@ const TeacherSubjectsTable = () => {
         <select
           value={form.subject_id}
           onChange={(e) => setForm({ ...form, subject_id: e.target.value })}
-          className="border p-2 rounded"
+          className="border border-blue-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         >
           <option value="">Select Subject</option>
@@ -167,7 +140,7 @@ const TeacherSubjectsTable = () => {
           placeholder="Section"
           value={form.section}
           onChange={(e) => setForm({ ...form, section: e.target.value })}
-          className="border p-2 rounded"
+          className="border border-blue-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
 
@@ -176,16 +149,16 @@ const TeacherSubjectsTable = () => {
           placeholder="Semester"
           value={form.semester}
           onChange={(e) => setForm({ ...form, semester: e.target.value })}
-          className="border p-2 rounded"
+          className="border border-blue-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
 
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 col-span-1 md:col-span-2">
           <button
             type="submit"
             className={`${
               editingId ? "bg-yellow-600" : "bg-blue-600"
-            } text-white px-4 py-2 rounded`}
+            } text-white px-4 py-2 rounded hover:opacity-90 transition`}
           >
             {editingId ? "Update Assignment" : "Add Assignment"}
           </button>
@@ -196,7 +169,7 @@ const TeacherSubjectsTable = () => {
                 setEditingId(null);
                 resetForm();
               }}
-              className="bg-gray-500 text-white px-4 py-2 rounded"
+              className="bg-gray-500 text-white px-4 py-2 rounded hover:opacity-90 transition"
             >
               Cancel
             </button>
@@ -206,45 +179,50 @@ const TeacherSubjectsTable = () => {
 
       {/* Table */}
       {loading ? (
-        <p>Loading...</p>
+        <p className="text-blue-600">Loading...</p>
       ) : (
-        <table className="min-w-full border border-gray-300">
-          <thead className="bg-gray-200">
-            <tr>
-              <th className="p-2 border">ID</th>
-              <th className="p-2 border">Teacher</th>
-              <th className="p-2 border">Subject</th>
-              <th className="p-2 border">Section</th>
-              <th className="p-2 border">Semester</th>
-              <th className="p-2 border">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {teacherSubjects.map((ts) => (
-              <tr key={ts.id}>
-                <td className="p-2 border">{ts.id}</td>
-                <td className="p-2 border">{ts.teacher_name}</td>
-                <td className="p-2 border">{ts.subject_name}</td>
-                <td className="p-2 border">{ts.section}</td>
-                <td className="p-2 border">{ts.semester}</td>
-                <td className="p-2 border space-x-2">
-                  <button
-                    onClick={() => startEdit(ts)}
-                    className="bg-yellow-500 text-white px-3 py-1 rounded"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => deleteTeacherSubject(ts.id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded"
-                  >
-                    Delete
-                  </button>
-                </td>
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white border border-gray-300 rounded shadow">
+            <thead className="bg-blue-100 text-blue-800">
+              <tr>
+                <th className="p-2 border">ID</th>
+                <th className="p-2 border">Teacher</th>
+                <th className="p-2 border">Subject</th>
+                <th className="p-2 border">Section</th>
+                <th className="p-2 border">Semester</th>
+                <th className="p-2 border">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {teacherSubjects.map((ts, idx) => (
+                <tr
+                  key={ts.id}
+                  className={idx % 2 === 0 ? "bg-white" : "bg-blue-50"}
+                >
+                  <td className="p-2 border text-center">{ts.id}</td>
+                  <td className="p-2 border">{ts.teacher_name}</td>
+                  <td className="p-2 border">{ts.subject_name}</td>
+                  <td className="p-2 border text-center">{ts.section}</td>
+                  <td className="p-2 border text-center">{ts.semester}</td>
+                  <td className="p-2 border text-center space-x-2">
+                    <button
+                      onClick={() => startEdit(ts)}
+                      className="bg-yellow-500 text-white px-3 py-1 rounded hover:opacity-90"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => deleteTeacherSubject(ts.id)}
+                      className="bg-red-500 text-white px-3 py-1 rounded hover:opacity-90"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

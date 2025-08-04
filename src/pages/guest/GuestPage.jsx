@@ -1,12 +1,42 @@
 import React, { useState } from "react";
+import { supabase } from "../../supabaseClient";
 
 const GuestPage = () => {
   const [form, setForm] = useState({ name: "", number: "" });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Welcome ${form.name}, we’ll contact you at ${form.number}!`);
-    setForm({ name: "", number: "" });
+
+    // Basic validation
+    if (form.name.trim().length < 3) {
+      alert("Name must be at least 3 characters long.");
+      return;
+    }
+    if (!/^\d{10}$/.test(form.number)) {
+      alert("Please enter a valid 10-digit contact number.");
+      return;
+    }
+
+    try {
+      const { error } = await supabase.from("guests").insert([
+        {
+          name: form.name.trim(),
+          contact_number: form.number.trim(),
+          visited_at: new Date().toISOString(), // optional
+        },
+      ]);
+
+      if (error) {
+        console.error("Supabase insert error:", error);
+        alert("Something went wrong. Please try again.");
+      } else {
+        alert(`Welcome ${form.name}, we’ll contact you at ${form.number}!`);
+        setForm({ name: "", number: "" });
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      alert("An error occurred while submitting the form.");
+    }
   };
 
   return (
@@ -25,6 +55,7 @@ const GuestPage = () => {
           onChange={(e) => setForm({ ...form, name: e.target.value })}
           className="w-full border border-gray-300 p-2 mb-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
+          minLength={3}
         />
         <input
           type="tel"
@@ -33,6 +64,8 @@ const GuestPage = () => {
           onChange={(e) => setForm({ ...form, number: e.target.value })}
           className="w-full border border-gray-300 p-2 mb-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
+          pattern="\d{10}"
+          title="Enter a valid 10-digit number"
         />
         <button
           type="submit"
