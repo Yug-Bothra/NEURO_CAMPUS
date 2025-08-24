@@ -236,13 +236,13 @@ const TeachersTable = () => {
                   <td className="px-4 py-2 flex flex-wrap gap-2">
                     <button
                       onClick={() => editTeacher(t)}
-                      className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => deleteTeacher(t.teacher_id)}
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                      className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
                     >
                       Delete
                     </button>
@@ -255,7 +255,7 @@ const TeachersTable = () => {
       </div>
 
       {/* ================= TEACHER LOGIN CREDENTIALS ================= */}
-      <h2 className="text-2xl font-bold text-green-600">Teacher Login Credentials</h2>
+      <h2 className="text-2xl font-bold text-blue-600">Teacher Login Credentials</h2>
 
       {/* Search */}
       <div className="mb-4">
@@ -264,13 +264,13 @@ const TeachersTable = () => {
           placeholder="Search by Teacher ID"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="border border-green-400 rounded px-4 py-2 w-full md:w-1/3"
+          className="border border-blue-400 rounded px-4 py-2 w-full md:w-1/3 focus:ring-2 focus:ring-blue-400 outline-none"
         />
       </div>
 
       <div className="bg-white rounded shadow overflow-x-auto">
         <table className="min-w-full text-sm">
-          <thead className="bg-green-600 text-white">
+          <thead className="bg-blue-600 text-white">
             <tr>
               <th className="p-3 text-left">Teacher ID</th>
               <th className="p-3 text-left">Name</th>
@@ -280,7 +280,7 @@ const TeachersTable = () => {
               <th className="p-3 text-left">Actions</th>
             </tr>
           </thead>
-          <tbody className="bg-white text-gray-800">
+          <tbody className="bg-white text-gray-800 divide-y divide-blue-100">
             {teachers
               .filter((t) =>
                 !search ? true : t.teacher_id.toLowerCase().includes(search.toLowerCase())
@@ -288,7 +288,7 @@ const TeachersTable = () => {
               .map((t) => {
                 const login = logins.find((l) => l.teacher_id === t.teacher_id);
                 return (
-                  <tr key={t.teacher_id} className="border-b">
+                  <tr key={t.teacher_id} className="hover:bg-blue-50 transition duration-150">
                     <td className="p-3">{t.teacher_id}</td>
                     <td className="p-3">{t.teacher_name}</td>
                     <td className="p-3">{login?.password || "svvv@123"}</td>
@@ -300,7 +300,7 @@ const TeachersTable = () => {
                       <button
                         onClick={() => resetPassword(t.teacher_id)}
                         disabled={resettingId === t.teacher_id}
-                        className="bg-blue-600 text-white px-3 py-1 rounded"
+                        className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
                       >
                         {resettingId === t.teacher_id ? "Resetting..." : "Reset Password"}
                       </button>

@@ -207,13 +207,13 @@ const TeacherSubjectsTable = () => {
                   <td className="p-2 border text-center space-x-2">
                     <button
                       onClick={() => startEdit(ts)}
-                      className="bg-yellow-500 text-white px-3 py-1 rounded hover:opacity-90"
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => deleteTeacherSubject(ts.id)}
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:opacity-90"
+                      className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded "
                     >
                       Delete
                     </button>

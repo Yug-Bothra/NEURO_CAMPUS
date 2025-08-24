@@ -43,7 +43,6 @@ const StudentsTable = () => {
     }
   };
 
-  // On mount
   useEffect(() => {
     fetchStudents();
     fetchLogins();
@@ -84,7 +83,7 @@ const StudentsTable = () => {
     }
   };
 
-  // Delete student (auto deletes login due to ON DELETE CASCADE)
+  // Delete student
   const deleteStudent = async (id) => {
     const { error } = await supabase
       .from("students")
@@ -137,7 +136,9 @@ const StudentsTable = () => {
     <div className="p-2 md:p-6 bg-gray-50 min-h-screen flex justify-center">
       <div className="w-full max-w-screen-lg">
         {/* --- STUDENTS MANAGEMENT --- */}
-        <h2 className="text-xl md:text-2xl font-bold text-blue-600 mb-4">Students</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-blue-600 mb-4">
+          Students
+        </h2>
 
         <form
           onSubmit={saveStudent}
@@ -216,7 +217,9 @@ const StudentsTable = () => {
             <button
               type="submit"
               className={`${
-                editingId ? "bg-yellow-500 hover:bg-yellow-600" : "bg-blue-600 hover:bg-blue-700"
+                editingId
+                  ? "bg-yellow-500 hover:bg-yellow-600"
+                  : "bg-blue-600 hover:bg-blue-700"
               } text-white px-3 md:px-5 py-2 rounded-lg shadow transition`}
             >
               {editingId ? "Update Student" : "Add Student"}
@@ -260,12 +263,18 @@ const StudentsTable = () => {
                 {students.map((s, idx) => (
                   <tr
                     key={s.enrollment_number}
-                    className={`border-b ${idx % 2 === 0 ? "bg-gray-50" : "bg-white"}`}
+                    className={`border-b ${
+                      idx % 2 === 0 ? "bg-gray-50" : "bg-white"
+                    }`}
                   >
-                    <td className="p-2 md:p-4 break-words">{s.enrollment_number}</td>
+                    <td className="p-2 md:p-4 break-words">
+                      {s.enrollment_number}
+                    </td>
                     <td className="p-2 md:p-4 break-words">{s.name}</td>
                     <td className="p-2 md:p-4 break-words">{s.email}</td>
-                    <td className="p-2 md:p-4 break-words">{s.mobile_number}</td>
+                    <td className="p-2 md:p-4 break-words">
+                      {s.mobile_number}
+                    </td>
                     <td className="p-2 md:p-4">{s.semester}</td>
                     <td className="p-2 md:p-4">{s.fees}</td>
                     <td className="p-2 md:p-4">{s.branch}</td>
@@ -276,17 +285,18 @@ const StudentsTable = () => {
                     <td className="p-2 md:p-4">
                       <div className="flex flex-col md:flex-row space-y-1 md:space-y-0 md:space-x-2">
                         <button
-                          onClick={() => startEdit(s)}
-                          className="bg-yellow-500 hover:bg-yellow-600 text-white px-2 md:px-4 py-1 rounded-lg shadow transition"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => deleteStudent(s.enrollment_number)}
-                          className="bg-red-500 hover:bg-red-600 text-white px-2 md:px-4 py-1 rounded-lg shadow transition"
-                        >
-                          Delete
-                        </button>
+  onClick={() => startEdit(s)}
+  className="bg-blue-600 hover:bg-blue-700 text-white px-2 md:px-4 py-1 rounded-lg shadow transition"
+>
+  Edit
+</button>
+<button
+  onClick={() => deleteStudent(s.enrollment_number)}
+  className="bg-red-600 hover:bg-red-700 text-white px-2 md:px-4 py-1 rounded-lg shadow transition"
+>
+  Delete
+</button>
+
                       </div>
                     </td>
                   </tr>
@@ -297,7 +307,7 @@ const StudentsTable = () => {
         )}
 
         {/* --- STUDENT LOGIN CREDENTIALS --- */}
-        <h2 className="text-xl md:text-2xl font-bold text-green-600 mb-4">
+        <h2 className="text-xl md:text-2xl font-bold text-blue-600 mb-4">
           Student Login Credentials
         </h2>
 
@@ -308,13 +318,13 @@ const StudentsTable = () => {
             placeholder="Search by Enrollment Number"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border border-green-400 rounded px-2 md:px-4 py-2 w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="border border-blue-400 rounded px-2 md:px-4 py-2 w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
 
         <div className="bg-white rounded-lg shadow-md overflow-x-auto">
           <table className="min-w-full text-xs md:text-sm">
-            <thead className="bg-green-600 text-white">
+            <thead className="bg-blue-600 text-white">
               <tr>
                 <th className="p-2 md:p-4 text-left">Enrollment</th>
                 <th className="p-2 md:p-4 text-left">Name</th>
@@ -340,11 +350,17 @@ const StudentsTable = () => {
                   return (
                     <tr
                       key={s.enrollment_number}
-                      className={`border-b ${idx % 2 === 0 ? "bg-gray-50" : "bg-white"}`}
+                      className={`border-b ${
+                        idx % 2 === 0 ? "bg-gray-50" : "bg-white"
+                      }`}
                     >
-                      <td className="p-2 md:p-4 break-words">{s.enrollment_number}</td>
+                      <td className="p-2 md:p-4 break-words">
+                        {s.enrollment_number}
+                      </td>
                       <td className="p-2 md:p-4 break-words">{s.name}</td>
-                      <td className="p-2 md:p-4 break-words">{login?.password || "svvv@123"}</td>
+                      <td className="p-2 md:p-4 break-words">
+                        {login?.password || "svvv@123"}
+                      </td>
                       <td className="p-2 md:p-4">
                         {login ? (login.must_reset ? "Yes" : "No") : "-"}
                       </td>
