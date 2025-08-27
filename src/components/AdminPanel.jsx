@@ -1,4 +1,4 @@
-""// src/components/AdminPanel.jsx
+// src/components/AdminPanel.jsx
 import React, { useState } from "react";
 import TeachersTable from "./TeachersTable";
 import StudentsTable from "./StudentsTable";
@@ -20,9 +20,15 @@ const AdminPanel = () => {
   ];
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
+    <div className="flex min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+      {/* Background Blobs */}
+      <div className="absolute top-20 -left-32 w-[32rem] h-[32rem] bg-blue-200/30 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-10 -right-40 w-[36rem] h-[36rem] bg-purple-200/30 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
+      <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-indigo-100/40 rounded-full blur-2xl animate-bounce animation-delay-4000"></div>
+
+      {/* Clerk Sign-In */}
       <SignedOut>
-        <div className="flex items-center justify-center w-full">
+        <div className="flex items-center justify-center w-full relative z-10">
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl transform rotate-3 opacity-20"></div>
             <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl transform -rotate-3 opacity-20"></div>
@@ -45,6 +51,7 @@ const AdminPanel = () => {
         </div>
       </SignedOut>
 
+      {/* Main Dashboard */}
       <SignedIn>
         <aside className="w-72 bg-white/80 backdrop-blur-xl shadow-2xl border-r border-white/20 fixed h-screen z-10">
           <div className="p-8 border-b border-slate-200/50">
@@ -121,7 +128,7 @@ const AdminPanel = () => {
           </div>
         </aside>
 
-        <main className="flex-1 p-8 ml-72">
+        <main className="flex-1 p-8 ml-72 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="mb-8">
               <div className="flex items-center gap-2 text-sm text-slate-500 mb-2">
@@ -153,6 +160,14 @@ const AdminPanel = () => {
           </div>
         </main>
       </SignedIn>
+
+      {/* Custom animation delays */}
+      <style>
+        {`
+          .animation-delay-2000 { animation-delay: 2s; }
+          .animation-delay-4000 { animation-delay: 4s; }
+        `}
+      </style>
     </div>
   );
 };

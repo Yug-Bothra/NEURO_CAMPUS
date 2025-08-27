@@ -8,6 +8,7 @@ import Accounts from "./Accounts";
 import CanteenLink from "./CanteenLink";
 import LibraryLink from "./LibraryLink";
 import ResumeBuilderLink from "./ResumeBuilderLink";
+import QuizApp from "./QuizApp"; // Import your quiz app component
 
 const StudentPanel = () => {
   const { enrollmentNumber } = useParams();
@@ -49,6 +50,13 @@ const StudentPanel = () => {
             >
               Accounts
             </Link>
+            {/* New Aptitude Quiz Button */}
+            <Link
+              to={`/student/panel/${enrollmentNumber}/aptitude`}
+              className="hover:underline"
+            >
+              Aptitude
+            </Link>
           </div>
         </div>
       </nav>
@@ -74,6 +82,8 @@ const StudentPanel = () => {
             path="accounts"
             element={<Accounts enrollmentNumber={enrollmentNumber} />}
           />
+          {/* New Route for QuizApp */}
+          <Route path="aptitude" element={<QuizApp />} />
         </Routes>
       </div>
     </div>
