@@ -5,14 +5,8 @@ import { useParams } from "react-router-dom";
 const QuizApp = () => {
   const { enrollmentNumber } = useParams(); // Get enrollment number from route
 
-  // Decide base URL based on environment
-  const baseURL =
-    import.meta.env.MODE === "development"
-      ? "http://localhost:5173"
-      : "https://quizz-18o9.vercel.app";
-
-  // Final quiz URL with enrollment param
-  const quizURL = `${baseURL}/?enrollment=${enrollmentNumber}`;
+  // Always use production quiz URL
+  const quizURL = `https://quizz-18o9.vercel.app/?enrollment=${enrollmentNumber}`;
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 text-center w-full max-w-md mx-auto">
