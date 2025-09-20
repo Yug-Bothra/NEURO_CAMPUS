@@ -1,4 +1,4 @@
-# 🎓 NEURO CAMPUS - AI & ML Based College Management System
+# 🎓 NEURO CAMPUS - AI & ML Based Campus Cloud Network
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://neuro-campus-73w8.vercel.app/)
 [![React](https://img.shields.io/badge/React-18+-blue)](https://reactjs.org/)
