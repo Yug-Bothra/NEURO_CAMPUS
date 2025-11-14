@@ -1,3 +1,4 @@
+// src/pages/RoleSelector.jsx
 import React from "react";
 import { Shield, BookOpen, GraduationCap, Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +15,7 @@ const RoleSelector = () => {
     Teacher: "bg-green-400 hover:bg-green-500",
     Student: "bg-pink-400 hover:bg-pink-500",
     "Guest / Visitor": "bg-gray-400 hover:bg-gray-500",
+    "Account Login": "bg-purple-400 hover:bg-purple-500",
   };
 
   const roles = [
@@ -21,15 +23,15 @@ const RoleSelector = () => {
     { label: "Teacher", path: "/teacher", icon: <BookOpen className="mr-2" /> },
     { label: "Student", path: "/student", icon: <GraduationCap className="mr-2" /> },
     { label: "Guest / Visitor", path: "/guest", icon: <Eye className="mr-2" /> },
+    // Removed Admin Login role here
+    { label: "Account Login", path: "/account-login", icon: <BookOpen className="mr-2" /> },
   ];
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-sky-200 via-cyan-200 to-pink-200 px-4 overflow-hidden">
-
       {/* College campus buildings silhouette */}
       <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-gray-300/40 to-transparent">
         <svg className="absolute bottom-0 w-full h-full" viewBox="0 0 1200 200" fill="none">
-          {/* Example building */}
           <rect x="100" y="80" width="120" height="120" fill="rgba(100,100,100,0.3)" />
           <rect x="110" y="90" width="20" height="30" fill="rgba(255,255,200,0.4)" />
           <rect x="140" y="90" width="20" height="30" fill="rgba(255,255,200,0.3)" />
@@ -38,7 +40,6 @@ const RoleSelector = () => {
           <rect x="140" y="130" width="20" height="30" fill="rgba(255,255,200,0.4)" />
           <rect x="170" y="130" width="20" height="30" fill="rgba(255,255,200,0.3)" />
           <polygon points="95,80 160,50 225,80" fill="rgba(100,100,100,0.4)" />
-          {/* Add other buildings, trees, library, dorms here as in your original SVG */}
         </svg>
       </div>
 
