@@ -6,7 +6,7 @@ const QuizApp = () => {
   const { enrollmentNumber } = useParams(); // Get enrollment number from route
 
   // Always use production quiz URL
-  const quizURL = `https://quizz-18o9.vercel.app/?enrollment=${enrollmentNumber}`;
+  const quizURL = `https://smart-career-guidance-system.vercel.app/`;
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 text-center w-full max-w-md mx-auto">
