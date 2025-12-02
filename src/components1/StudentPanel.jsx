@@ -8,7 +8,8 @@ import Accounts from "./Accounts";
 import CanteenLink from "./CanteenLink";
 import LibraryLink from "./LibraryLink";
 import ResumeBuilderLink from "./ResumeBuilderLink";
-import QuizApp from "./QuizApp"; // Import your quiz app component
+import QuizApp from "./QuizApp";
+import Foram from "./foram"; // ✅ NEW IMPORT
 
 const StudentPanel = () => {
   const { enrollmentNumber } = useParams();
@@ -26,37 +27,50 @@ const StudentPanel = () => {
             >
               Attendance
             </Link>
+
             <Link
               to={`/student/panel/${enrollmentNumber}/canteen`}
               className="hover:underline"
             >
               E-Canteen
             </Link>
+
             <Link
               to={`/student/panel/${enrollmentNumber}/library`}
               className="hover:underline"
             >
               E-Library
             </Link>
+
             <Link
               to={`/student/panel/${enrollmentNumber}/resume`}
               className="hover:underline"
             >
               Resume Builder
             </Link>
+
             <Link
               to={`/student/panel/${enrollmentNumber}/accounts`}
               className="hover:underline"
             >
               Accounts
             </Link>
-            {/* New Aptitude Quiz Button */}
+
             <Link
               to={`/student/panel/${enrollmentNumber}/aptitude`}
               className="hover:underline"
             >
               Aptitude
             </Link>
+
+            {/* ✅ New Foram Button */}
+            <Link
+              to={`/student/panel/${enrollmentNumber}/foram`}
+              className="hover:underline"
+            >
+              Foram
+            </Link>
+
           </div>
         </div>
       </nav>
@@ -71,19 +85,26 @@ const StudentPanel = () => {
             path="profile"
             element={<StudentProfile enrollmentNumber={enrollmentNumber} />}
           />
+
           <Route
             path="attendance"
             element={<Attendance enrollmentNumber={enrollmentNumber} />}
           />
+
           <Route path="canteen" element={<CanteenLink />} />
           <Route path="library" element={<LibraryLink />} />
           <Route path="resume" element={<ResumeBuilderLink />} />
+
           <Route
             path="accounts"
             element={<Accounts enrollmentNumber={enrollmentNumber} />}
           />
-          {/* New Route for QuizApp */}
+
           <Route path="aptitude" element={<QuizApp />} />
+
+          {/* ✅ NEW ROUTE FOR FORAM */}
+          <Route path="foram" element={<Foram />} />
+
         </Routes>
       </div>
     </div>
