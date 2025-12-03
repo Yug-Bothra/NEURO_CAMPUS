@@ -1,10 +1,13 @@
 // src/pages/TeachersLogin.jsx
-import React from "react";
+import React, { useEffect } from "react";
 
-const TeachersLogin = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <h1 className="text-2xl font-bold">Teacher Login Page</h1>
-  </div>
-);
+const TeachersLogin = () => {
+  useEffect(() => {
+    // Redirect to Teacher Panel (no back button loop)
+    window.location.replace("https://teacher-panel-chi.vercel.app/");
+  }, []);
+
+  return null; // no UI
+};
 
 export default TeachersLogin;

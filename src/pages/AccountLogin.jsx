@@ -1,10 +1,13 @@
 // src/pages/AccountLogin.jsx
-import React from "react";
+import React, { useEffect } from "react";
 
-const AccountLogin = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <h1 className="text-2xl font-bold">Account Login Page</h1>
-  </div>
-);
+const AccountLogin = () => {
+  useEffect(() => {
+    // Redirect to Account/Admin Panel (no back button loop)
+    window.location.replace("https://admin-panel-gamma-jade.vercel.app/");
+  }, []);
+
+  return null; // no UI
+};
 
 export default AccountLogin;
