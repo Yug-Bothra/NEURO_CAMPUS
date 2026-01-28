@@ -50,7 +50,6 @@ const AdminPanel = () => {
           </div>
         </div>
       </SignedOut>
-
       {/* Main Dashboard */}
       <SignedIn>
         <aside className="w-72 bg-white/80 backdrop-blur-xl shadow-2xl border-r border-white/20 fixed h-screen z-10">
