@@ -70,7 +70,11 @@ const StudentsLogin = () => {
       else {
         sessionStorage.setItem(
           "student",
-          JSON.stringify({ ...loginData, password: newPassword.trim(), must_reset: false })
+          JSON.stringify({
+            ...loginData,
+            password: newPassword.trim(),
+            must_reset: false,
+          })
         );
         navigate(`/student/panel/${loginData.enrollment_number}`);
       }
@@ -87,13 +91,12 @@ const StudentsLogin = () => {
       {/* Castle-like campus silhouette */}
       <div className="absolute bottom-0 left-0 w-full h-56 bg-gradient-to-t from-gray-300/40 to-transparent">
         <svg className="absolute bottom-0 w-full h-full" viewBox="0 0 1200 200" fill="none">
-          {/* Buildings */}
           <rect x="50" y="70" width="100" height="130" fill="rgba(100,100,120,0.3)" />
           <rect x="180" y="50" width="80" height="150" fill="rgba(110,110,130,0.3)" />
           <rect x="280" y="80" width="60" height="120" fill="rgba(120,100,120,0.3)" />
           <rect x="370" y="60" width="90" height="140" fill="rgba(100,110,120,0.25)" />
           <rect x="480" y="90" width="50" height="110" fill="rgba(120,120,140,0.2)" />
-          {/* Roofs/Towers */}
+
           <polygon points="50,70 100,30 150,70" fill="rgba(90,90,110,0.3)" />
           <polygon points="180,50 220,15 260,50" fill="rgba(80,80,100,0.3)" />
           <polygon points="280,80 310,50 340,80" fill="rgba(90,90,110,0.3)" />
@@ -164,7 +167,9 @@ const StudentsLogin = () => {
               className="w-full px-4 py-3 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-400 outline-none transition"
               required
             />
+
             {error && <p className="text-red-500 text-sm">{error}</p>}
+
             <button
               type="submit"
               disabled={loading}
@@ -172,6 +177,19 @@ const StudentsLogin = () => {
             >
               {loading ? "Logging in..." : "Login"}
             </button>
+
+            {/* Demo Login */}
+            <div className="mt-4 text-sm text-gray-600 text-left bg-gray-100 p-3 rounded-lg">
+              <p className="font-semibold text-gray-700">Demo Login :</p>
+              <p>
+                Username:{" "}
+                <span className="font-mono">22100BTAIMLM11277</span>
+              </p>
+              <p>
+                Password:{" "}
+                <span className="font-mono">Yugyug@123</span>
+              </p>
+            </div>
           </form>
         )}
 
