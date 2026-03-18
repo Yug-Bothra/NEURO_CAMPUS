@@ -56,11 +56,6 @@ const AdminPanel = () => {
           <div className="p-8 border-b border-slate-200/50">
             <div className="flex justify-between items-center">
               <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  Admin Panel 
-                  Demo LogIn: admin@gmail.com
-                  Password: Yugyug@123
-                </h1>
                 <p className="text-slate-500 text-sm mt-1">Management Dashboard</p>
               </div>
               <div className="relative">
