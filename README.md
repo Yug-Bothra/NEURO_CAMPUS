@@ -17,7 +17,8 @@ Use the following demo credentials to explore the system:
 * **Password:** `Yugyug@123`
 
 ### 👑 **Admin Panel**
-* *(Demo credentials available on request)*
+* **Username:** `yugbothra@gmail.com`
+* **Password:** `Yugyug@123`
 
 ---
 
